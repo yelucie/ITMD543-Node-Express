@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'yelucie-node-express'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_FF70A22B6C1041C685B5DB26931454F6 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_425E0933466C4A31A1DFE780C7CEEE55 }}
           package: .

@@ -13,7 +13,7 @@
     width: 100%;
     min-height: 100vh;
     background: #5691d5;
-    background: linear-gradient(282deg, #009dff 0%, #54bdff);
+    background: linear-gradient(282deg, #0044ff 0%, #54bdff);
 }
 
 .box {
@@ -46,15 +46,15 @@
 }
 
 .uploadLabel span {
-    color: #18a7ff;
+    color: #1884ff;
     font-size: 70px;
 }
 
 .uploadLabel p {
-    color: #18a7ff;
+    color: #1884ff;
     font-size: 20px;
     font-weight: 800;
-    font-family: cursive;
+    font-family: 'Calibri';
 }
 
 .uploaded {
@@ -81,7 +81,7 @@
 }
 
 .filetype {
-    background: #18a7ff;
+    background: #1884ff;
     color: #fff;
     padding: 5px 15px;
     font-size: 20px;
@@ -90,7 +90,7 @@
     border-radius: 3px;
 }
 
-.left h3 {
+.left h3, h2 {
     font-weight: 600;
     font-size: 18px;
     color: #292F42;
@@ -102,7 +102,7 @@
 }
 
 .right span {
-    background: #18a7ff;
+    background: #1884ff;
     color: #fff;
     cursor: pointer;
     border-radius: 50%;
@@ -116,7 +116,7 @@
 }
 
 img {
-    background: #18a7ff;
+    background: #1884ff;
     color: #fff;
     cursor: pointer;
     border-radius: 50%;

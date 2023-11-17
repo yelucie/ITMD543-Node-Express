@@ -1,21 +1,24 @@
 document.addEventListener("DOMContentLoaded", (event) => {
     // Upload the file
     const input = document.getElementById("upload");
+    const override = document.getElementById('overrideCheckbox');
     input.addEventListener("change", (evt) => {
         const fileUploaded = evt.target.files[0];
 
         if (fileUploaded) {
             let fileName = fileUploaded.name;
             let fileType = fileName.split(".").pop();
-            fileShow(fileName, fileType);
 
-            var data = new FormData()
-            data.append('file', input.files[0])
+            if (checkFileExists(fileName)) {
+                if (!override.checked) {
+                    alert(`File "${fileName}" already exists in the file list.`);
+                    return;
+                } else {
+                    removeFile(fileName, document.getElementById(fileName));
+                }
+            }
 
-            fetch('/upload', {
-                method: 'POST',
-                body: data
-            })
+            uploadFile(input, fileName, fileType);
         }
     });
 
@@ -26,13 +29,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
             data.forEach(file => {
                 fileShow(file.name, file.name.split(".").pop());
             });
-        })
+        });
 })
 
 // Show on the page
 function fileShow(fileName, fileType) {
     const fileContainer = document.createElement('div');
     fileContainer.classList.add("showFile");
+    fileContainer.setAttribute('id', fileName);
 
     // Left container (type and title)
     const leftContainer = document.createElement('div');
@@ -74,6 +78,34 @@ function fileShow(fileName, fileType) {
     files.appendChild(fileContainer);
 }
 
+function uploadFile(input, fileName, fileType) {
+    fileShow(fileName, fileType);
+
+    var data = new FormData();
+    data.append('file', input.files[0]); 
+
+    fetch('/upload', {
+        method: 'POST',
+        body: data
+    }).then(response => {
+        // Log the response
+        console.log(response);
+    
+        // Check if the response is successful (status code in the range 200-299)
+        if (response.ok) {
+            return response.json(); // assuming the response contains JSON data
+        } else {
+            throw new Error(`Failed to upload file: ${response.status}`);
+        }
+    }).then(data => {
+        // Handle the JSON data if needed
+        console.log(data);
+    }).catch(error => {
+        // Handle errors
+        console.error(error);
+    });
+}
+
 function downloadFile(fileName) {
     window.location.href = `./files/${fileName}`;
 }
@@ -91,4 +123,16 @@ function removeFile(fileName, fileContainer) {
         .then(data => {
             fileContainer.remove();
         })
+}
+
+function checkFileExists(fileName) {
+    const fileContainers = document.querySelectorAll('.showFile');
+
+    for (const container of fileContainers) {
+        const title = container.querySelector('.left h3');
+        if (title && (title.innerHTML === fileName)) {
+            return true;
+        }
+    }
+    return false;
 }

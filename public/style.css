@@ -57,6 +57,11 @@
     font-family: 'Calibri';
 }
 
+label {
+    font-family: 'Calibri';
+    color: #6f7174;
+}
+
 .uploaded {
     margin: 30px 0;
     font-size: 16px;
@@ -123,4 +128,18 @@ img {
     width: 25px;
     height: 25px;
     margin-right: 10px;
+}
+
+.overrider {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #292F42;
+    margin: 5px;
+}
+
+#overrideCheckbox {
+    margin: 5px;
 }

@@ -15,6 +15,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     return;
                 } else {
                     removeFile(fileName, document.getElementById(fileName));
+                    uploadFile(input, fileName, fileType);
+                    return;
                 }
             }
 
@@ -82,27 +84,11 @@ function uploadFile(input, fileName, fileType) {
     fileShow(fileName, fileType);
 
     var data = new FormData();
-    data.append('file', input.files[0]); 
+    data.append('file', input.files[0]);
 
     fetch('/upload', {
         method: 'POST',
         body: data
-    }).then(response => {
-        // Log the response
-        console.log(response);
-    
-        // Check if the response is successful (status code in the range 200-299)
-        if (response.ok) {
-            return response.json(); // assuming the response contains JSON data
-        } else {
-            throw new Error(`Failed to upload file: ${response.status}`);
-        }
-    }).then(data => {
-        // Handle the JSON data if needed
-        console.log(data);
-    }).catch(error => {
-        // Handle errors
-        console.error(error);
     });
 }
 

@@ -4,7 +4,7 @@ const controller = require("../controller/filecontroller");
 const router = express.Router();
 
 let routes = (app) =>{
-    router.get('/', (req, res) => res.sendFile(path.join(__dirname, './public/index.html')));
+    //router.get('/', (req, res) => res.sendFile(path.join(__dirname, './public/index.html')));
 
     router.post("/upload", controller.upload);
     router.get("/files", controller.getListFiles);
